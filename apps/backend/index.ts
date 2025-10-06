@@ -24,7 +24,7 @@ app.post("/user",async (req,res)=>{
     })
 
     res.json({
-        "message":"User Created"
+        "message":"User Created successfully"
     })
     }catch(e){
         res.status(500).json({ error: e });
