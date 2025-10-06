@@ -23,6 +23,10 @@ jobs:
           file: ./docker/Dockerfile.backend
           push: true
           tags: adityajha02/todo-app-backend:${{ github.sha }}
-
-
+        ## Step to add this to VM
+      - name: Deploy to the VM
+      - run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" &> ~/ssh_key
+          chmod 700 /home/runner/ssh_key
+          ssh -o StrictHostKeyChecking=no -i ~/ssh_key root@3.75.186.104 -t "sudo docker stop user_backend && sudo docker run --name todo_backend -d -p 8080:8080 adityajha02/user-app-backend:${{ github.sha }}"
 
