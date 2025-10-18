@@ -21,11 +21,11 @@ jobs:
         with:
           context: .
           file: ./docker/Dockerfile.frontend
-          build-args:
+          --build-args:
             DATABASE_URL=${{ secrets.DATABASE_URL }}
           push: true
           tags: adityajha02/todo-app-frontend:${{ github.sha }}
       - run: |
           echo "${{ secrets.SSH_PRIVATE_KEY }}" &> ~/ssh_key
           chmod 700 ~/ssh_key
-          ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@3.72.20.71 "sudo docker rm -f todo_frontend || true && sudo docker run --name todo_frontend -e DATABASE_URL=${{ secrets.DATABASE_URL }} -d -p 3000:3000 adityajha02/todo-app-frontend:${{ github.sha }}"
+          ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@3.72.20.71 "sudo docker rm -f todo_frontend || true && sudo docker run --name todo_frontend --build-args DATABASE_URL=${{ secrets.DATABASE_URL }} -d -p 3000:3000 adityajha02/todo-app-frontend:${{ github.sha }}"
