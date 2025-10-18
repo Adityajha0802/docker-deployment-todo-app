@@ -26,4 +26,4 @@ jobs:
       - run: |
           echo "${{ secrets.SSH_PRIVATE_KEY }}" &> ~/ssh_key
           chmod 700 ~/ssh_key
-          ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@3.72.20.71 "sudo docker rm -f todo_ws || true && sudo docker run --name todo_websocket -d -p 8081:8081 adityajha02/todo-app-websocket:${{ github.sha }}"
+          ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@3.72.20.71 "sudo docker rm -f todo_websocket || true && sudo docker run --name todo_websocket -d -p 8081:8081 adityajha02/todo-app-websocket:${{ github.sha }}"
