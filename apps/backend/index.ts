@@ -6,6 +6,10 @@ const app = express();
 
 app.use(express.json());
 
+app.get("/",(req,res)=>{
+    res.send("hello from backend!");
+})
+
 app.post("/user",async (req,res)=>{
     const username = req.body.username;
     const password = req.body.password;
