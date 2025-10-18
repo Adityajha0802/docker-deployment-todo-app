@@ -26,8 +26,12 @@ jobs:
       - name: Deploy to the VM
       - run: |
           echo "${{ secrets.SSH_PRIVATE_KEY }}" &> ~/ssh_key
+          mkdir -p /home/runner/.ssh
+          ls /home/runner/.ssh
+          touch /home/runner/.ssh/known_hosts
+          echo "${{ secrets.KNOWN_HOSTS }}" &> /home/runner/.ssh/known_hosts
           chmod 700 /home/runner/ssh_key
-          ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@3.72.20.71 -t "sudo docker stop todo_backend && sudo docker run --name todo_backend -d -p 8080:8080 adityajha02/todo-app-backend:${{ github.sha }}"
+          ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@3.72.20.71 -t "docker stop todo_backend && docker run --name todo_backend -d -p 8080:8080 100xdevs/todo-app-backend:${{ github.sha }}"
 
 
 
