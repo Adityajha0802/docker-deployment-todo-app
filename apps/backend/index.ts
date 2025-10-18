@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 
 app.get("/",(req,res)=>{
-    res.send("hello from backend.It is a todo app where you can create your todo! ");
+    res.send("hello from backend. You can create your todo! ");
 })
 
 app.post("/user",async (req,res)=>{
