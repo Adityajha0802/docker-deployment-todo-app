@@ -24,9 +24,9 @@ jobs:
           push: true
           tags: adityajha02/todo-app-backend:${{ github.sha }}
       - run: |
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" &> ~/ssh_key
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/ssh_key
           chmod 700 ~/ssh_key
-          ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@3.72.20.71 -t "sudo docker stop todo_backend && sudo docker run --name todo_backend -d -p 8080:8080 adityajha02/todo-app-backend:${{ github.sha }}"
+          ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@3.72.20.71 -t "sudo docker rm -f todo_backend || true && sudo docker run --name todo_backend -d -p 8080:8080 adityajha02/todo-app-backend:${{ github.sha }}"
 
 
 
